@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Dapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using SGS.Connection;
@@ -14,6 +15,7 @@ namespace SGS.Controllers
             return View();
         }
 
+        [Authorize(Policy = "Teste")]
         public IActionResult Privacy()
         {
             return View();
