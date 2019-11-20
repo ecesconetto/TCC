@@ -10,8 +10,8 @@ using SGS.Models;
 namespace SGS.Migrations
 {
     [DbContext(typeof(SGSContext))]
-    [Migration("20191029231454_Identity")]
-    partial class Identity
+    [Migration("20191119225853_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
