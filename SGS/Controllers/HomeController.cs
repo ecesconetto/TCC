@@ -1,9 +1,5 @@
 ﻿using System.Diagnostics;
-using Dapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MySql.Data.MySqlClient;
-using SGS.Connection;
 using SGS.Models;
 
 namespace SGS.Controllers

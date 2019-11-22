@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SGS.Models
 {
@@ -16,6 +13,7 @@ namespace SGS.Models
         public int Telefone { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
+        public virtual List<AlunoNota> AlunoNotas { get; set; }
         //public Matricula Matricula { get; set; }
         //public Cursos Cursos { get; set; }
 

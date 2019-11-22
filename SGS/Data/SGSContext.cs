@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace SGS.Models
@@ -14,6 +10,8 @@ namespace SGS.Models
         {
         }
 
-        public DbSet<SGS.Models.Aluno> Aluno { get; set; }
+        public DbSet<Aluno> Aluno { get; set; }
+        public DbSet<Disciplina> Disciplina { get; set; }
+        public DbSet<AlunoNota> AlunoNota { get; set; }
     }
 }

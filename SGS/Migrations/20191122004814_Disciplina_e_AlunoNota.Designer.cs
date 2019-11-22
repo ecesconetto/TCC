@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SGS.Models;
 
 namespace SGS.Migrations
 {
     [DbContext(typeof(SGSContext))]
-    partial class SGSContextModelSnapshot : ModelSnapshot
+    [Migration("20191122004814_Disciplina_e_AlunoNota")]
+    partial class Disciplina_e_AlunoNota
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
