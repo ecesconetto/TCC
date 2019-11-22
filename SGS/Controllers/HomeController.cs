@@ -15,7 +15,7 @@ namespace SGS.Controllers
             return View();
         }
 
-        [Authorize(Policy = "Teste")]
+        //[Authorize(Policy = "Teste")]
         public IActionResult Privacy()
         {
             return View();

@@ -86,7 +86,8 @@ namespace SGS
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("Teste", policy => policy.RequireClaim("Privacidade"));
+                options.AddPolicy("Admin", policy => policy.RequireClaim("Admin"));
+                options.AddPolicy("Aluno", policy => policy.RequireClaim("Aluno"));
             });
         }
 

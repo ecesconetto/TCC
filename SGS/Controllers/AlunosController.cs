@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SGS.Models;
 
@@ -12,10 +11,12 @@ namespace SGS.Controllers
     public class AlunosController : Controller
     {
         private readonly SGSContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public AlunosController(SGSContext context)
+        public AlunosController(SGSContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Alunos
@@ -43,6 +44,7 @@ namespace SGS.Controllers
         }
 
         // GET: Alunos/Create
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -59,6 +61,22 @@ namespace SGS.Controllers
             {
                 _context.Add(aluno);
                 await _context.SaveChangesAsync();
+
+                //Cria usuário no Identity
+                var usuarioCriado = Task.Run(() => _userManager.CreateAsync(
+                   new IdentityUser()
+                   {
+                       UserName = aluno.Email,
+                       NormalizedUserName = aluno.Email.ToUpper(),
+                       Email = aluno.Email
+                   }, aluno.Senha)).Result;
+
+                //Busca o usuário recém criado para vincular as claims
+                var newUser = await _userManager.FindByEmailAsync(aluno.Email);
+
+                //Adiciona as claims de aluno
+                var claimsAdicionadas = Task.Run(() => _userManager.AddClaimAsync(newUser, new Claim("Aluno", "Aluno"))).Result;
+
                 return RedirectToAction(nameof(Index));
             }
             return View(aluno);
