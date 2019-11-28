@@ -21,7 +21,7 @@
                         @if (User.HasClaim("Aluno", "Aluno"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Alunos" asp-action="Nota">Notas</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Alunos" asp-action="Notas">Notas</a>
                             </li>
                         }
                         @if (User.HasClaim("Admin", "Admin"))

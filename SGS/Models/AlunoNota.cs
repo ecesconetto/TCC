@@ -7,6 +7,8 @@
         public Disciplina Disciplina { get; set; }
         public int AlunoId { get; set; }
         public Aluno Aluno { get; set; }
-        public decimal Nota { get; set; }
+        public decimal Nota1 { get; set; }
+        public decimal Nota2 { get; set; }  
+        public decimal Nota3 { get; set; }
     }
 }

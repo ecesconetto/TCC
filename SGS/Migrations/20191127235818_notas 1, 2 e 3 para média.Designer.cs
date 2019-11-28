@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SGS.Models;
 
 namespace SGS.Migrations
 {
     [DbContext(typeof(SGSContext))]
-    partial class SGSContextModelSnapshot : ModelSnapshot
+    [Migration("20191127235818_notas 1, 2 e 3 para média")]
+    partial class notas12e3paramédia
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

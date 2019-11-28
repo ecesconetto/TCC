@@ -44,10 +44,6 @@ namespace SGS
                     options.UseSqlServer(
                         Configuration.GetConnectionString("SGSContext")));
 
-            //services.AddDbContext<AuthenticationContext>(options =>
-            //        options.UseSqlServer(
-            //            Configuration.GetConnectionString("AuthenticationContext")));
-
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                  .AddEntityFrameworkStores<SGSContext>();

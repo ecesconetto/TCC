@@ -1,10 +1,13 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SGS.Models;
+using SGS.ViewModel;
 
 namespace SGS.Controllers
 {
@@ -166,5 +169,49 @@ namespace SGS.Controllers
         {
             return _context.Aluno.Any(e => e.AlunoId == id);
         }
+
+        // GET: Notas/Aluno
+        [HttpGet]
+        public async Task<IActionResult> Notas()
+        {
+            try
+            {
+                var usernameLogado = _userManager.GetUserName(User);
+
+                var model = _context.AlunoNota
+                                .Include(x => x.Aluno)
+                                .Include(x => x.Disciplina)
+                                .Where(x => x.Aluno.Email.Equals(usernameLogado)).ToList();
+
+                var retorno = new List<AlunoNotaViewModel>();
+
+                foreach (var item in model)
+                {
+                    retorno.Add(new AlunoNotaViewModel()
+                    {
+                        NomeAluno = item.Aluno.NomeDoAluno,
+                        NomeDisciplina = item.Disciplina.Nome,
+                        Nota1 = item.Nota1,
+                        Nota2 = item.Nota2,
+                        Nota3 = item.Nota3,
+                        Media = GetMedia(item.Nota1, item.Nota2, item.Nota3),
+                        Status = GetStatus(GetMedia(item.Nota1, item.Nota2, item.Nota3)),
+                        Classe = GetClass(GetMedia(item.Nota1, item.Nota2, item.Nota3))
+                    });
+                }
+
+                return View(retorno);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private decimal GetMedia(decimal nota1, decimal nota2, decimal nota3) => (nota1 + nota2 + nota3) / 3;
+
+        private string GetStatus(decimal media) => (media >= 7 ? "Aprovado" : "Reprovado");
+
+        private string GetClass(decimal media) => (media >= 7 ? "aprovado" : "reprovado");
     }
 }
